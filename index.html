@@ -1,0 +1,201 @@
+import React, { useState } from 'react';
+import { Cpu, Shield, Network, Zap, DollarSign, Users, ChevronDown, ChevronUp } from 'lucide-react';
+
+const GensynInfographic = () => {
+  const [expandedSection, setExpandedSection] = useState(null);
+
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
+  const sections = [
+    {
+      id: 'problem',
+      title: 'The Problem',
+      icon: <DollarSign className="w-8 h-8" />,
+      color: 'from-red-500 to-orange-500',
+      content: [
+        'AI training costs are skyrocketing - models like GPT-4 cost $100M+ to train',
+        'GPU shortages make it nearly impossible for startups to access compute',
+        'Hyperscalers (AWS, GCP, Azure) have monopolistic pricing power',
+        'Billions of dollars worth of GPU capacity sits idle worldwide',
+        'Centralized compute creates barriers to entry for AI innovation'
+      ]
+    },
+    {
+      id: 'solution',
+      title: 'How Gensyn Works',
+      icon: <Network className="w-8 h-8" />,
+      color: 'from-blue-500 to-cyan-500',
+      content: [
+        '1. SUPPLY SIDE: GPU/CPU owners connect their idle hardware to the network',
+        '2. DEMAND SIDE: Researchers/developers submit ML training jobs with compute requirements',
+        '3. MATCHING: Protocol automatically matches jobs with available compute resources',
+        '4. EXECUTION: Training happens in a distributed manner across the network',
+        '5. VERIFICATION: Cryptographic proofs ensure work was completed correctly',
+        '6. SETTLEMENT: Compute providers get paid in tokens, users pay for verified compute'
+      ]
+    },
+    {
+      id: 'unique',
+      title: 'What Makes Gensyn Unique',
+      icon: <Shield className="w-8 h-8" />,
+      color: 'from-purple-500 to-pink-500',
+      content: [
+        'PROBABILISTIC VERIFICATION: Novel proof system validates compute without re-running it (solves the trust problem)',
+        'GRAPH-BASED PROTOCOL: Optimized specifically for ML workloads, not general compute',
+        'ETHEREUM ROLLUP: Built on battle-tested infrastructure with real security guarantees',
+        'FOCUS ON TRAINING: Targets the expensive part (training) rather than inference',
+        'ECONOMIC INCENTIVES: Token rewards align network participants without central coordination',
+        'PRODUCTION READY: Actually shipping working testnets with real applications, not just whitepapers'
+      ]
+    },
+    {
+      id: 'benefits',
+      title: 'Key Benefits',
+      icon: <Zap className="w-8 h-8" />,
+      color: 'from-green-500 to-emerald-500',
+      content: [
+        'FOR RESEARCHERS: 60-80% cost reduction on ML training compared to cloud providers',
+        'FOR GPU OWNERS: Monetize idle hardware that would otherwise generate zero revenue',
+        'FOR STARTUPS: Access to compute without massive upfront capital or long-term contracts',
+        'FOR THE ECOSYSTEM: Democratizes AI development, reduces concentration of power',
+        'SCALABILITY: Network gets stronger as more compute joins (network effects)',
+        'TRANSPARENCY: All compute usage and pricing is on-chain and auditable'
+      ]
+    },
+    {
+      id: 'tech',
+      title: 'Technical Architecture',
+      icon: <Cpu className="w-8 h-8" />,
+      color: 'from-indigo-500 to-blue-500',
+      content: [
+        'VERIFICATION LAYER: Truebit-inspired probabilistic verification system',
+        'COORDINATION LAYER: Smart contracts on Ethereum L2 for job matching and settlement',
+        'EXECUTION LAYER: P2P network for distributed training with fault tolerance',
+        'INCENTIVE LAYER: Token economics that reward honest compute providers and penalize bad actors',
+        'INTEROPERABILITY: Works with existing ML frameworks (PyTorch, TensorFlow, etc.)',
+        'HARDWARE AGNOSTIC: Supports NVIDIA, AMD GPUs, and even high-end CPUs'
+      ]
+    },
+    {
+      id: 'traction',
+      title: 'Current Traction & Roadmap',
+      icon: <Users className="w-8 h-8" />,
+      color: 'from-yellow-500 to-orange-500',
+      content: [
+        'FUNDING: $50M+ raised from a16z crypto, Eden Block, and other top VCs',
+        'TESTNET: Public testnet live with multiple applications (CodeAssist, RL Swarm, BlockAssist)',
+        'TEAM: Founded by Ben Fielding & Harry Grieve with deep ML and crypto backgrounds',
+        'COMMUNITY: Growing developer community testing and building on the protocol',
+        'PARTNERSHIPS: Working with AI labs and research institutions for pilot programs',
+        'MAINNET: Expected 2025 with initial focus on smaller training workloads'
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-block p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-4">
+            <Network className="w-16 h-16 text-white" />
+          </div>
+          <h1 className="text-5xl font-bold text-white mb-4">
+            Gensyn Protocol
+          </h1>
+          <p className="text-2xl text-purple-300 mb-2">
+            Decentralized Machine Learning Compute Network
+          </p>
+          <p className="text-lg text-gray-400">
+            Connecting the world's GPUs into one unified network for AI training
+          </p>
+        </div>
+
+        {/* Main Value Prop */}
+        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 mb-8 shadow-2xl">
+          <h2 className="text-3xl font-bold text-white mb-4 text-center">
+            The Vision
+          </h2>
+          <p className="text-xl text-white text-center leading-relaxed">
+            Make AI development accessible to everyone by creating a global marketplace 
+            for compute power. Anyone with a GPU can contribute. Anyone building AI can access 
+            affordable compute. No gatekeepers. No monopolies.
+          </p>
+        </div>
+
+        {/* Expandable Sections */}
+        <div className="space-y-4">
+          {sections.map((section) => (
+            <div 
+              key={section.id}
+              className="bg-slate-800 rounded-xl overflow-hidden shadow-xl border border-slate-700 hover:border-purple-500 transition-all duration-300"
+            >
+              <button
+                onClick={() => toggleSection(section.id)}
+                className="w-full p-6 flex items-center justify-between hover:bg-slate-750 transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`p-3 bg-gradient-to-br ${section.color} rounded-lg`}>
+                    {section.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">{section.title}</h3>
+                </div>
+                {expandedSection === section.id ? (
+                  <ChevronUp className="w-6 h-6 text-purple-400" />
+                ) : (
+                  <ChevronDown className="w-6 h-6 text-purple-400" />
+                )}
+              </button>
+              
+              {expandedSection === section.id && (
+                <div className="px-6 pb-6">
+                  <div className="bg-slate-900 rounded-lg p-6 space-y-3">
+                    {section.content.map((item, idx) => (
+                      <div key={idx} className="flex gap-3">
+                        <div className={`mt-1 w-2 h-2 rounded-full bg-gradient-to-r ${section.color} flex-shrink-0`} />
+                        <p className="text-gray-300 leading-relaxed">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 shadow-2xl">
+          <h2 className="text-3xl font-bold text-white mb-4 text-center">
+            Why This Matters
+          </h2>
+          <p className="text-xl text-white text-center leading-relaxed mb-6">
+            AI is becoming the most important technology of our time. But right now, only Big Tech 
+            can afford to train cutting-edge models. Gensyn changes that by making compute accessible 
+            to researchers, startups, and developers worldwide. This isn't just about cheaper GPUs—
+            it's about democratizing who gets to build the future of AI.
+          </p>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-6 py-3">
+              <p className="text-white font-semibold">$50M+ Raised</p>
+            </div>
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-6 py-3">
+              <p className="text-white font-semibold">Testnet Live</p>
+            </div>
+            <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-6 py-3">
+              <p className="text-white font-semibold">Built on Ethereum</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-8 text-center text-gray-500">
+          <p>Click each section to expand and learn more</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GensynInfographic;
